@@ -1,1 +1,5 @@
 real_dns_scanner.py
+*.txt
+ammas-tuturial.md
+/__pycache__
+test_print_fix.py
