@@ -19,6 +19,9 @@
         .footer a { color: #6366f1; font-weight: bold; }
         .footer .heart { color: #ef4444; animation: pulse 1.2s infinite alternate; }
         @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.2); } }
+        .pagination { text-align: center; margin: 1em 0; }
+        .pagination button { margin: 0 0.3em; padding: 0.5em 1.2em; border-radius: 6px; border: 1px solid #cbd5e1; background: #f1f5f9; color: #333; font-size: 1em; cursor: pointer; }
+        .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -26,6 +29,7 @@
     <div class="search-container">
         <input type="text" id="searchBox" class="search-box" placeholder="Search by keyword...">
     </div>
+    <div class="pagination" id="pagination"></div>
     <table id="subdomainTable">
         <thead>
             <tr><th>#</th><th>URL</th><th>Title</th><th>Description</th></tr>
@@ -34,32 +38,69 @@
             <tr><td colspan="4" style="text-align:center;">Loading...</td></tr>
         </tbody>
     </table>
+    <div class="pagination" id="pagination-bottom"></div>
     <div class="footer">
         Created with <span class="heart">♥</span> by <a href="https://github.com/TheSnowGuru" target="_blank">@TheSnowGuru</a>
     </div>
     <script>
     let subdomains = [];
-    function renderTable(filter = "") {
+    let filtered = [];
+    let currentPage = 1;
+    const perPage = 100;
+
+    function renderTable(page = 1) {
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = "";
-        let count = 0;
-        subdomains.forEach((item, idx) => {
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+        let count = start;
+        const pageData = filtered.slice(start, end);
+        pageData.forEach((item, idx) => {
             const { url, title, description } = item;
-            if (
-                !filter ||
-                url.toLowerCase().includes(filter) ||
-                (title && title.toLowerCase().includes(filter)) ||
-                (description && description.toLowerCase().includes(filter))
-            ) {
-                count++;
-                const row = `<tr><td>${count}</td><td><a href="${url}" target="_blank">${url}</a></td><td>${title}</td><td>${description}</td></tr>`;
-                tbody.insertAdjacentHTML('beforeend', row);
-            }
+            count++;
+            const row = `<tr><td>${count}</td><td><a href="${url}" target="_blank">${url}</a></td><td>${title}</td><td>${description}</td></tr>`;
+            tbody.insertAdjacentHTML('beforeend', row);
         });
-        if (count === 0) {
+        if (pageData.length === 0) {
             tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No results found.</td></tr>';
         }
+        renderPagination(page);
     }
+
+    function renderPagination(page) {
+        const totalPages = Math.ceil(filtered.length / perPage) || 1;
+        const pagDivs = [document.getElementById('pagination'), document.getElementById('pagination-bottom')];
+        pagDivs.forEach(pagDiv => {
+            pagDiv.innerHTML = '';
+            pagDiv.innerHTML += `<button onclick="gotoPage(1)" ${page === 1 ? 'disabled' : ''}>First</button>`;
+            pagDiv.innerHTML += `<button onclick="gotoPage(${page-1})" ${page === 1 ? 'disabled' : ''}>Prev</button>`;
+            pagDiv.innerHTML += `<span> Page ${page} of ${totalPages} </span>`;
+            pagDiv.innerHTML += `<button onclick="gotoPage(${page+1})" ${page === totalPages ? 'disabled' : ''}>Next</button>`;
+            pagDiv.innerHTML += `<button onclick="gotoPage(${totalPages})" ${page === totalPages ? 'disabled' : ''}>Last</button>`;
+        });
+    }
+
+    function gotoPage(page) {
+        const totalPages = Math.ceil(filtered.length / perPage) || 1;
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+        currentPage = page;
+        renderTable(currentPage);
+    }
+
+    function filterData(filter = "") {
+        filter = filter.trim().toLowerCase();
+        filtered = subdomains.filter(item =>
+            (!filter ||
+                item.url.toLowerCase().includes(filter) ||
+                (item.title && item.title.toLowerCase().includes(filter)) ||
+                (item.description && item.description.toLowerCase().includes(filter))
+            )
+        );
+        currentPage = 1;
+        renderTable(currentPage);
+    }
+
     fetch('subdomains_data.json')
         .then(resp => resp.json())
         .then(data => {
@@ -73,10 +114,10 @@
                     "Base44 - Home"
                 ].includes(item.title)
             );
-            renderTable();
+            filterData();
         });
     document.getElementById('searchBox').addEventListener('input', function() {
-        renderTable(this.value.trim().toLowerCase());
+        filterData(this.value);
     });
     </script>
 </body>
