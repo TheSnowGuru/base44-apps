@@ -1,0 +1,62 @@
+[
+    {
+      "country": "Greece",
+      "cities": ["Athens", "Thessaloniki", "Crete", "Rhodes"],
+      "pros": ["Golden Visa", "Low property prices", "Tourism demand", "Mild climate", "EU member"],
+      "cons": ["High property taxes", "Bureaucracy", "Economic instability history"]
+    },
+    {
+      "country": "Cyprus",
+      "cities": ["Nicosia", "Limassol", "Larnaca", "Paphos"],
+      "pros": ["English widely spoken", "Attractive tax regime", "Safe & stable", "EU member"],
+      "cons": ["Small market", "Limited capital appreciation", "Divided island politics"]
+    },
+    {
+      "country": "Thailand",
+      "cities": ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Koh Samui"],
+      "pros": ["Low cost of entry", "Tourism hotspot", "High rental yields", "Strong expat community"],
+      "cons": ["Foreign ownership restrictions", "Currency risk", "Political volatility"]
+    },
+    {
+      "country": "Poland",
+      "cities": ["Warsaw", "Krakow", "Gdansk", "Wroclaw"],
+      "pros": ["Strong economy", "EU member", "Growing rental market", "Affordable properties"],
+      "cons": ["Language barrier", "Cold winters", "Higher taxes for foreigners"]
+    },
+    {
+      "country": "Hungary",
+      "cities": ["Budapest", "Debrecen", "Szeged"],
+      "pros": ["High yield in Budapest", "Affordable prices", "EU member", "Growing expat interest"],
+      "cons": ["Political uncertainty", "Currency volatility", "Rental regulations tightening"]
+    },
+    {
+      "country": "Bulgaria",
+      "cities": ["Sofia", "Varna", "Burgas", "Plovdiv"],
+      "pros": ["EU member", "Low entry cost", "Ski and beach property mix", "Citizenship via residency"],
+      "cons": ["Corruption concerns", "Weak legal enforcement", "Depopulation trends"]
+    },
+    {
+      "country": "Montenegro",
+      "cities": ["Kotor", "Budva", "Podgorica", "Tivat"],
+      "pros": ["Citizenship by investment", "Tourism demand", "Euro-based economy", "Beautiful coastline"],
+      "cons": ["Not in EU yet", "Small market", "Seasonal demand", "Infrastructure limits"]
+    },
+    {
+      "country": "Serbia",
+      "cities": ["Belgrade", "Novi Sad", "Niš"],
+      "pros": ["High yield potential", "Fast-growing capital", "Low cost of living", "Visa-free for many countries"],
+      "cons": ["Non-EU", "Political tensions", "Uncertain regulation"]
+    },
+    {
+      "country": "United States",
+      "cities": ["Miami", "New York", "Los Angeles", "Austin", "Houston", "Atlanta", "Orlando"],
+      "pros": ["High liquidity", "Stable legal system", "Diverse markets", "Strong appreciation", "Financing options"],
+      "cons": ["High entry prices", "Taxes vary by state", "Management complexity", "Visa issues for some buyers"]
+    },
+    {
+      "country": "Portugal",
+      "cities": ["Lisbon", "Porto", "Faro", "Madeira"],
+      "pros": ["Golden Visa (until recently)", "Strong expat demand", "High rental income", "EU member"],
+      "cons": ["Golden Visa changes", "Price increases", "Rental restrictions in Lisbon & Porto"]
+    }
+  ]
